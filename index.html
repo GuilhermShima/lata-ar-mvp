@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <title>Lata AR MVP</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      button {
-        margin: 10px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      model-viewer {
-        width: 100%;
-        height: 500px;
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Experiência AR - Lata 3D</h1>
-    <p>Escolha o sabor:</p>
+<head>
+  <meta charset="UTF-8" />
+  <title>Lata AR MVP - iOS & Android</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    model-viewer {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Experiência AR - Lata 3D (iOS & Android)</h1>
+  <p>Escolha o sabor:</p>
 
-    <button onclick="document.getElementById('viewer').src='https://www.dropbox.com/scl/fi/9iyymyabhqvf3fvny83up/sabor1.glb?rlkey=7jb9q2f8uyqbajt2339s9icwb&st=xpru0f0h&raw=1'">Sabor 1</button>
-    <button onclick="document.getElementById('viewer').src='https://www.dropbox.com/scl/fi/9akq9wlcmkzs5xkmbpa8d/sabor2.glb?rlkey=bbqyxoz4965uqegoxssrvx4y2&st=mttb3czn&raw=1'">Sabor 2</button>
-    <button onclick="document.getElementById('viewer').src='https://www.dropbox.com/scl/fi/a4s2q33try74zcfqhah2f/sabor3.glb?rlkey=jtsa77z4pmgurnovvh8bbfw48&st=q49o60vz&raw=1'">Sabor 3</button>
+  <button onclick="changeModel('1')">Sabor 1</button>
+  <button onclick="changeModel('2')">Sabor 2</button>
+  <button onclick="changeModel('3')">Sabor 3</button>
 
-    <model-viewer id="viewer"
-      src="https://www.dropbox.com/scl/fi/9iyymyabhqvf3fvny83up/sabor1.glb?rlkey=7jb9q2f8uyqbajt2339s9icwb&st=xpru0f0h&raw=1"
-      ar
-      ar-modes="scene-viewer webxr quick-look"
-      camera-controls
-      alt="Lata em AR">
-    </model-viewer>
-  </body>
+  <model-viewer
+    id="viewer"
+    src="https://www.dropbox.com/scl/fi/9iyymyabhqvf3fvny83up/sabor1.glb?rlkey=7jb9q2f8uyqbajt2339s9icwb&st=xpru0f0h&raw=1"
+    ios-src="https://www.dropbox.com/scl/fi/pfjn8yd9zujf9ebqsyr9l/sabor1.usdz?rlkey=hw9xl8z8ndlx9vnvt6j1zd7l1&st=rppsa50s&raw=1"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls
+    alt="Lata em AR">
+  </model-viewer>
+
+  <script>
+    const modelViewer = document.getElementById('viewer');
+
+    const models = {
+      '1': {
+        glb: 'https://www.dropbox.com/scl/fi/9iyymyabhqvf3fvny83up/sabor1.glb?rlkey=7jb9q2f8uyqbajt2339s9icwb&st=xpru0f0h&raw=1',
+        usdz: 'https://www.dropbox.com/scl/fi/pfjn8yd9zujf9ebqsyr9l/sabor1.usdz?rlkey=hw9xl8z8ndlx9vnvt6j1zd7l1&st=rppsa50s&raw=1'
+      },
+      '2': {
+        glb: 'https://www.dropbox.com/scl/fi/9akq9wlcmkzs5xkmbpa8d/sabor2.glb?rlkey=bbqyxoz4965uqegoxssrvx4y2&st=mttb3czn&raw=1',
+        usdz: 'https://www.dropbox.com/scl/fi/97um3830ogs29ubzl2jhy/sabor2.usdz?rlkey=u5vg9mvhrvzhis1kbogdp8w2u&st=8m0kw7yh&raw=1'
+      },
+      '3': {
+        glb: 'https://www.dropbox.com/scl/fi/a4s2q33try74zcfqhah2f/sabor3.glb?rlkey=jtsa77z4pmgurnovvh8bbfw48&st=v8yn7nd8&raw=1',
+        usdz: 'https://www.dropbox.com/scl/fi/4copt9gxtk8tk2nusr5ey/sabor3.usdz?rlkey=emah7xqqee6didsys0dlb26j3&st=v8yn7nd8&raw=1'
+      }
+    };
+
+    function changeModel(sabor) {
+      modelViewer.src = models[sabor].glb;
+      modelViewer.setAttribute('ios-src', models[sabor].usdz);
+    }
+  </script>
+</body>
 </html>
